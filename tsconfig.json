@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "jsx": "react",
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "baseUrl": "./src",
+    "noImplicitAny": true,
+    "experimentalDecorators": true
+  },
+  "include": [
+    "components/**/*.ts*",
+    "./typings.d.ts",
+  ]
+}
