@@ -1,19 +1,48 @@
 import React from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet, TextProps, TextStyle, StyleProp } from 'react-native';
+
+type TextVariant = 'title' | 'body';
 
 type StyledTextProps = {
-  style?: StyleSheet.NamedStyles<any>;
-}
+  style?: StyleProp<TextStyle>;
+  variant?: TextVariant;
+  align?: 'center' | 'left' | 'right';
+} & TextProps;
 
-const styles = StyleSheet.create({
-  defaultFont: {
+const styles = StyleSheet.create<Record<string, object>>({
+  text: {
     fontFamily: 'lato',
-    fontSize: 15
+    marginBottom: 4
+  },
+  default: {
+    fontSize: 15,
+  },
+  title: {
+    fontSize: 20,
+    marginTop: 12
   },
 });
 
-const StyledText: React.SFC<StyledTextProps> = (props) => {
-  return <Text {...props} style={[props.style, styles.defaultFont]} />;
-}
+const StyledText: React.SFC<StyledTextProps> = ({
+  variant,
+  style,
+  align,
+  ...other
+}) => {
+  const alignStyle = { textAlign: align };
+  const variantStyle = styles[variant!];
 
-export default StyledText
+  return (
+    <Text
+      {...other}
+      style={[style, styles.text, styles.default, alignStyle, variantStyle]}
+    />
+  );
+};
+
+StyledText.defaultProps = {
+  align: 'left',
+  variant: 'body',
+};
+
+export default StyledText;

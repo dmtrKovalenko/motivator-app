@@ -1,15 +1,17 @@
 import { NavigationScreenOptions } from 'react-navigation'
 
-type NavigationScreenComponent<T = {}> = {
+type NavigationScreenComponent<T = any> = {
   navigationOptions?: NavigationScreenOptions
 } & React.ComponentType<T>
 
-const screen = (title: string) => (Component: NavigationScreenComponent) => {
+const screen = (title: string, options?: NavigationScreenOptions) => <T>(Component: NavigationScreenComponent<T>) => {
   Component.navigationOptions = {
-    title,
+    title,  
     headerTitleStyle: {
-      fontFamily: 'lato'
-    }
+      fontFamily: 'lato',
+      fontSize: 20
+    }, 
+    ...options
   } 
 
   return Component

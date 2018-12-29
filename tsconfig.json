@@ -9,11 +9,11 @@
     "esModuleInterop": true,
     "baseUrl": "./src",
     "noImplicitAny": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "experimentalDecorators": true
   },
   "include": [
-    "components/**/*.ts*",
+    "./App.tsx",
+    "./src/**/*.ts*",
     "./typings.d.ts",
   ]
 }
