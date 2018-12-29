@@ -9,6 +9,9 @@ import {
   View,
   FlexAlignType,
 } from 'react-native';
+import { inject, observer } from 'mobx-react';
+import AuthStore from '../stores/AuthStore';
+import StyledText from '../components/StyledText';
 
 const styles = StyleSheet.create({
   container: {
@@ -24,16 +27,26 @@ const styles = StyleSheet.create({
   },
 });
 
-function HomeScreen() {
-  return (
-    <View style={styles.container}>
-      <Text>Get started by opening</Text>
-    </View>
-  );
-}
-
-HomeScreen.navigationOptions = {
-  title: "Sobaka"
+type Props = {
+  navigationStore: AuthStore;
 };
 
-export default HomeScreen
+const HomeScreen = ({ navigationStore }: Props) => {
+  console.log(navigationStore);
+
+  return (
+    <View style={styles.container}>
+      <StyledText>Get started by opening </StyledText>
+    </View>
+  );
+};
+
+HomeScreen.navigationOptions = {
+  title: 'Sobaka',
+  headerTitleStyle: {
+    fontWeight: 'bold',
+    fontFamily: 'lato',
+  },
+};
+
+export default observer(HomeScreen);

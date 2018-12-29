@@ -1,11 +1,13 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
-import { AppLoading } from 'expo';
+import { AppLoading, Font } from 'expo';
+import { Provider } from 'mobx-react';
 import AppNavigator from './src/navigation/AppNavigator';
+import stores from './src/stores';
 
 type Props = {
   skipLoadingScreen: boolean;
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -14,13 +16,18 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class App extends React.Component<Props> {
+export default class App extends React.PureComponent<Props> {
   state = {
     isLoadingComplete: false,
   };
 
   private loadResourcesAsync = async () => {
-    return Promise.resolve()
+    return Promise.all([
+      stores.authStore.loadCurrentUser(),
+      Font.loadAsync({
+        lato: require('./src/assets/fonts/Lato-Regular.ttf'),
+      }),
+    ]) as Promise<any>
   };
 
   private handleLoadingError = error => {
@@ -42,13 +49,16 @@ export default class App extends React.Component<Props> {
           onFinish={this.handleFinishLoading}
         />
       );
-    }
+    } 
 
     return (
-      <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <AppNavigator />
-      </View>
+      <Provider {...stores}>
+        <View style={styles.container}>
+          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+
+          <AppNavigator />
+        </View>
+      </Provider>
     );
   }
 }

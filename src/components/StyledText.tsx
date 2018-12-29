@@ -1,8 +1,19 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 
-export class MonoText extends React.Component<{ style: any }> {
-  render() {
-    return <Text {...this.props} style={[this.props.style]} />;
-  }
+type StyledTextProps = {
+  style?: StyleSheet.NamedStyles<any>;
 }
+
+const styles = StyleSheet.create({
+  defaultFont: {
+    fontFamily: 'lato',
+    fontSize: 15
+  },
+});
+
+const StyledText: React.SFC<StyledTextProps> = (props) => {
+  return <Text {...props} style={[props.style, styles.defaultFont]} />;
+}
+
+export default StyledText
