@@ -35,7 +35,7 @@ const StyledText: React.SFC<StyledTextProps> = ({
   return (
     <Text
       {...other}
-      style={[style, styles.text, styles.default, alignStyle, variantStyle]}
+      style={[styles.text, styles.default, alignStyle, variantStyle, style]}
     />
   );
 };

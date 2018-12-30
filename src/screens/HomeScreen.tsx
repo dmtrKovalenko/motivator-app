@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import AuthStore from '~/stores/AuthStore';
-import StyledText from '~/components/StyledText';
+import StyledText from '@ui/StyledText';
 
 const styles = StyleSheet.create({
   container: {

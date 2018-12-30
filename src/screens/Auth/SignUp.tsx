@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Image, StyleSheet, View, Button } from 'react-native';
 import screen from '~/components/screen';
-import ScreenContainer from '~/components/ScreenContainer';
+import ScreenContainer from '@ui/ScreenContainer';
 import Logo from '~/assets/images/logo.jpg';
-import StyledText from '~/components/StyledText';
+import StyledText from '@ui/StyledText';
 import { NavigationScreenProps } from 'react-navigation';
 
 interface SignUpProps extends NavigationScreenProps {}

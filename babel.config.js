@@ -6,6 +6,7 @@ module.exports = function(api) {
       ["module-resolver", {
         "alias": {
           "~": "./src",
+          "@ui": "./src/@ui"
         }
       }]
     ]
