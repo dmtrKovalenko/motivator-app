@@ -3,14 +3,18 @@ import { AsyncStorage } from 'react-native';
 
 class AuthStore {
   @observable currentUser = null;
-  
+
   public loadCurrentUser = async () => {
-    const savedUserJson = await AsyncStorage.getItem('currentUser')
+    const savedUserJson = await AsyncStorage.getItem('currentUser');
 
     if (savedUserJson) {
-      this.currentUser = JSON.parse(savedUserJson)
+      this.currentUser = JSON.parse(savedUserJson);
     }
+  };
+
+  get isAuthenticated() {
+    return Boolean(this.currentUser);
   }
 }
 
-export default AuthStore
+export default AuthStore;

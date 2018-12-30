@@ -6,10 +6,13 @@
     "module": "esnext",
     "moduleResolution": "node",
     "strict": true,
-    "esModuleInterop": true,
     "baseUrl": "./src",
+    "esModuleInterop": true,
     "noImplicitAny": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "paths": {
+      "~/*": ["*"]
+    }
   },
   "include": [
     "./App.tsx",

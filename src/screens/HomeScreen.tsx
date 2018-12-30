@@ -10,8 +10,8 @@ import {
   FlexAlignType,
 } from 'react-native';
 import { inject, observer } from 'mobx-react';
-import AuthStore from '../stores/AuthStore';
-import StyledText from '../components/StyledText';
+import AuthStore from '~/stores/AuthStore';
+import StyledText from '~/components/StyledText';
 
 const styles = StyleSheet.create({
   container: {
