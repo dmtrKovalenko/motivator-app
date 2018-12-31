@@ -12,5 +12,7 @@ export default {
   warningBackground: '#EAEB5E',
   warningText: '#666804',
   noticeBackground: tintColor,
-  noticeText: '#fff',
+  noticeText: '#fff', 
+  textColor: 'rgba(0,0,0,0.74)',
+  hintTextColor: 'rgba(0, 0, 0, 0.54)'
 };

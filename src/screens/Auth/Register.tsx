@@ -1,29 +1,50 @@
 import * as React from 'react';
-import ScreenContainer from '@ui/ScreenContainer';
 import screen from '~/components/screen';
 import { TextField } from '~/components/Form';
 import { Formik } from 'formik';
-import {
-  Button,
-  StyleSheet,
-  View,
-  ScrollView,
-  KeyboardAvoidingView,
-} from 'react-native';
-import StyledText from '~/@ui/StyledText';
+import { Button, StyleSheet, View } from 'react-native';
+import StyledText from '@ui/StyledText';
+import ScreenContainer from '@ui/ScreenContainer';
+import { RegisterSchema } from '~/models/validate/RegisterSchema';
+import { inject, observer } from 'mobx-react';
+import AuthStore from '~/stores/AuthStore';
+import { User } from '~/models/User';
+import { NavigationScreenProps } from 'react-navigation';
 
-interface RegisterProps {}
+interface RegisterProps extends NavigationScreenProps {
+  authStore: AuthStore;
+}
 
 const styles = StyleSheet.create({
   submitBtn: {
     marginTop: 'auto',
   },
+  delimiterText: {
+    marginTop: 0,
+  },
+  weightContainer: {
+    paddingTop: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 'auto',
+    marginBottom: 'auto',
+  },
+  weightInput: {
+    width: '40%',
+    maxWidth: '40%',
+  },
 });
 
-const Register: React.SFC<RegisterProps> = props => {
+const Register: React.SFC<RegisterProps> = ({ authStore, navigation }) => {
   return (
     <ScreenContainer scroll avoidKeyboard>
-      <Formik initialValues={{}} onSubmit={console.log}>
+      <Formik
+        initialValues={{} as User}
+        onSubmit={data =>
+          authStore.register(data).then(() => navigation.navigate('Home'))
+        }
+        validationSchema={RegisterSchema}
+      >
         {props => (
           <>
             <TextField
@@ -43,16 +64,38 @@ const Register: React.SFC<RegisterProps> = props => {
               textContentType="password"
             />
 
-            <StyledText align="center">
+            <StyledText style={styles.delimiterText} align="center">
               Make sure that your information will be saved only on your device
               and won't pushed to any database.
             </StyledText>
+
+            <View style={styles.weightContainer}>
+              <TextField
+                formik={props}
+                name="weight"
+                align="center"
+                label="Current weight"
+                placeholder="Be honest"
+                keyboardType="numeric"
+                containerStyle={styles.weightInput}
+              />
+
+              <TextField
+                formik={props}
+                name="goal"
+                align="center"
+                label="Weight goal"
+                placeholder="Be honest"
+                keyboardType="numeric"
+                containerStyle={styles.weightInput}
+              />
+            </View>
 
             <View style={styles.submitBtn}>
               <Button
                 title="Start becoming better"
                 disabled={!props.isValid}
-                onPress={props.handleSubmit as any}
+                onPress={() => props.handleSubmit()}
               />
             </View>
           </>
@@ -62,4 +105,6 @@ const Register: React.SFC<RegisterProps> = props => {
   );
 };
 
-export default screen('Register', { headerLeft: null })(Register);
+export default screen('Register', { headerLeft: null })(
+  inject('authStore')(observer(Register))
+);

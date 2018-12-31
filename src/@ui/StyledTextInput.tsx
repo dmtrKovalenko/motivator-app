@@ -1,41 +1,85 @@
 import * as React from 'react';
-import { TextInput, StyleSheet, TextInputProps, View } from 'react-native';
-import StyledText from './StyledText';
+import {
+  TextInput,
+  StyleSheet,
+  TextInputProps,
+  View,
+  StyleProp,
+  ViewStyle,
+  TextProps,
+} from 'react-native';
+import StyledText, { StyledTextProps } from './StyledText';
+import Colors from '~/constants/Colors';
 
 export interface StyledTextInputProps extends TextInputProps {
   label?: string;
+  error?: boolean;
+  helperText?: string;
+  align?: StyledTextProps['align'];
+  containerStyle?: StyleProp<ViewStyle>;
 }
 
-const labelColor = 'rgba(0, 0, 0, 0.54)'
 const styles = StyleSheet.create({
   styledTextInput: {
     borderBottomWidth: 1,
-    borderBottomColor: labelColor,
+    borderBottomColor: Colors.hintTextColor,
     paddingBottom: 4,
     marginBottom: 16,
-    fontSize: 15
+    fontSize: 15,
   },
   label: {
     fontSize: 14,
-    color: labelColor
-  }
-})
+    color: Colors.hintTextColor,
+  },
+  helperText: {
+    fontSize: 11,
+    marginTop: -16,
+    marginBottom: 8,
+    color: Colors.hintTextColor,
+  },
+  error: {
+    color: Colors.errorBackground,
+  },
+  errorBorder: {
+    borderBottomColor: Colors.errorBackground,
+  },
+});
 
 const StyledTextInput: React.SFC<StyledTextInputProps> = ({
   label,
   style,
+  error,
+  align,
+  helperText,
+  containerStyle,
   ...other
 }) => {
   return (
-    <View>
+    <View style={containerStyle}>
       {label && (
-        <StyledText style={styles.label}>{label}</StyledText>
+        <StyledText align={align} style={styles.label}>
+          {label}
+        </StyledText>
       )}
 
       <TextInput
-        style={[style, styles.styledTextInput]}
+        style={[
+          style,
+          styles.styledTextInput,
+          align && { textAlign: align },
+          error && styles.errorBorder,
+        ]}
         {...other}
       />
+
+      {helperText && (
+        <StyledText
+          align={align}
+          style={[styles.helperText, error && styles.error]}
+        >
+          {helperText}
+        </StyledText>
+      )}
     </View>
   );
 };

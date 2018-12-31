@@ -1,9 +1,10 @@
 import React from 'react';
 import { Text, StyleSheet, TextProps, TextStyle, StyleProp } from 'react-native';
+import Colors from '~/constants/Colors';
 
 type TextVariant = 'title' | 'body';
 
-type StyledTextProps = {
+export type StyledTextProps = {
   style?: StyleProp<TextStyle>;
   variant?: TextVariant;
   align?: 'center' | 'left' | 'right';
@@ -11,8 +12,9 @@ type StyledTextProps = {
 
 const styles = StyleSheet.create<Record<string, object>>({
   text: {
+    marginBottom: 4,
     fontFamily: 'lato',
-    marginBottom: 4
+    color: Colors.textColor
   },
   default: {
     fontSize: 15,

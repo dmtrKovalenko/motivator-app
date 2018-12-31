@@ -11,8 +11,8 @@
     "noImplicitAny": true,
     "experimentalDecorators": true,
     "paths": {
+      "@ui/*": ["@ui/*"],
       "~/*": ["*"],
-      "@ui/*": ["@ui/*"]
     }
   },
   "include": [

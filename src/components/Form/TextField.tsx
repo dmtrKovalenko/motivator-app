@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { FormikProps } from 'formik';
-import StyledText, { StyledTextInputProps } from '~/@ui/StyledTextInput';
+import StyledTextInput, { StyledTextInputProps } from '@ui/StyledTextInput';
+
 
 interface InputProps<T> extends StyledTextInputProps {
   name: string;
@@ -9,14 +10,19 @@ interface InputProps<T> extends StyledTextInputProps {
 
 const TextField: React.SFC<InputProps<any>> = ({
   name,
-  formik: formikProps,
+  formik,
   ...other
 }) => {
+  const error = formik.errors[name] as string;
+  const toShowError = Boolean(error) && formik.touched[name] as boolean
+
   return (
-    <StyledText
-      value={formikProps.values[name]}
-      onBlur={formikProps.handleBlur(name)}
-      onChangeText={formikProps.handleChange(name)}
+    <StyledTextInput
+      value={formik.values[name]}
+      onBlur={formik.handleBlur(name)}
+      onChangeText={formik.handleChange(name)}
+      helperText={toShowError ? error : undefined}
+      error={toShowError}
       {...other}
     />
   );

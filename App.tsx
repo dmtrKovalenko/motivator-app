@@ -4,6 +4,7 @@ import { AppLoading, Font } from 'expo';
 import { Provider } from 'mobx-react';
 import AppNavigator from './src/navigation/AppNavigator';
 import stores from './src/stores';
+import navigator from '~/utils/navigator';
 
 type Props = {
   skipLoadingScreen: boolean;
@@ -27,7 +28,7 @@ export default class App extends React.PureComponent<Props> {
       Font.loadAsync({
         lato: require('./src/assets/fonts/Lato-Regular.ttf'),
       }),
-    ]) as Promise<any>
+    ]) as Promise<any>;
   };
 
   private handleLoadingError = (error: Error) => {
@@ -49,14 +50,22 @@ export default class App extends React.PureComponent<Props> {
           onFinish={this.handleFinishLoading}
         />
       );
-    } 
+    }
 
     return (
       <Provider {...stores}>
         <View style={styles.container}>
           {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
 
-          <AppNavigator isAuthenticated={stores.authStore.isAuthenticated} />
+          <AppNavigator
+            ref={navigatorRef => {
+              if (!navigatorRef) {
+                throw new Error("navigatorRef cannot be set")
+              }
+              
+              navigator.setTopLevelNavigator(navigatorRef.dispatch)
+            }}
+          />
         </View>
       </Provider>
     );
