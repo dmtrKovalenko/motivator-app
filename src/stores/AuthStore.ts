@@ -5,14 +5,14 @@ import { encrypt } from '~/utils/encryptor';
 import navigator from '~/utils/navigator';
 
 class AuthStore {
-  @observable currentUser = null;
+  @observable currentUser: User | null = null;
+  @observable isAuthenticated = false;
 
-  @computed get isAuthenticated() {
+  @computed get canAuthenticate() {
     return Boolean(this.currentUser);
   }
 
   public loadCurrentUser = async () => {
-    await AsyncStorage.clear();
     const savedUserJson = await AsyncStorage.getItem('currentUser');
 
     if (savedUserJson) {
@@ -35,6 +35,19 @@ class AuthStore {
     await AsyncStorage.setItem('currentUser', JSON.stringify(user));
     navigator.navigate('Home');
   };
+
+  public authenticate = (password: string) => {
+    if (this.canAuthenticate) {
+      const hash = encrypt(password)
+  
+      if (hash === this.currentUser!.password) {
+        navigator.navigate('Home')
+        return true
+      }
+    }
+
+    return false
+  }
 }
 
 export default AuthStore;

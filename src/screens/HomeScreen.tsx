@@ -31,9 +31,7 @@ type Props = {
   navigationStore: AuthStore;
 };
 
-const HomeScreen = ({ navigationStore }: Props) => {
-  console.log(navigationStore);
-
+const HomeScreen = (props: Props) => {
   return (
     <View style={styles.container}>
       <StyledText>Get started by opening </StyledText>

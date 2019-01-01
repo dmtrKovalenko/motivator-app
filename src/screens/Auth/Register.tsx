@@ -10,15 +10,13 @@ import { inject, observer } from 'mobx-react';
 import AuthStore from '~/stores/AuthStore';
 import { User } from '~/models/User';
 import { NavigationScreenProps } from 'react-navigation';
+import FormActions from '@ui/FormActions';
 
 interface RegisterProps extends NavigationScreenProps {
   authStore: AuthStore;
 }
 
 const styles = StyleSheet.create({
-  submitBtn: {
-    marginTop: 'auto',
-  },
   delimiterText: {
     marginTop: 0,
   },
@@ -91,13 +89,13 @@ const Register: React.SFC<RegisterProps> = ({ authStore, navigation }) => {
               />
             </View>
 
-            <View style={styles.submitBtn}>
+            <FormActions>
               <Button
                 title="Start becoming better"
                 disabled={!props.isValid}
                 onPress={() => props.handleSubmit()}
               />
-            </View>
+            </FormActions>
           </>
         )}
       </Formik>

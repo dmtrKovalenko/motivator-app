@@ -17,6 +17,7 @@ export interface StyledTextInputProps extends TextInputProps {
   helperText?: string;
   align?: StyledTextProps['align'];
   containerStyle?: StyleProp<ViewStyle>;
+  forwardRef?: React.Ref<any>
 }
 
 const styles = StyleSheet.create({
@@ -52,6 +53,7 @@ const StyledTextInput: React.SFC<StyledTextInputProps> = ({
   align,
   helperText,
   containerStyle,
+  forwardRef,
   ...other
 }) => {
   return (
@@ -63,11 +65,12 @@ const StyledTextInput: React.SFC<StyledTextInputProps> = ({
       )}
 
       <TextInput
+        ref={forwardRef}
         style={[
-          style,
           styles.styledTextInput,
           align && { textAlign: align },
           error && styles.errorBorder,
+          style,
         ]}
         {...other}
       />

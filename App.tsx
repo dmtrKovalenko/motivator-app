@@ -2,7 +2,7 @@ import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Font } from 'expo';
 import { Provider } from 'mobx-react';
-import AppNavigator from './src/navigation/AppNavigator';
+import createAppNavigator from './src/navigation/AppNavigator';
 import stores from './src/stores';
 import navigator from '~/utils/navigator';
 
@@ -52,6 +52,7 @@ export default class App extends React.PureComponent<Props> {
       );
     }
 
+    const AppNavigator = createAppNavigator()
     return (
       <Provider {...stores}>
         <View style={styles.container}>

@@ -4,12 +4,14 @@ import {
   View,
   ScrollView,
   KeyboardAvoidingView,
+  StyleProp,
+  ViewStyle,
 } from 'react-native';
-import { Header } from 'react-navigation';
 
 type ScreenContainerProps = {
   scroll?: boolean;
   avoidKeyboard?: boolean;
+  centered?: boolean;
   style?: StyleSheet.NamedStyles<any>;
 };
 
@@ -28,16 +30,20 @@ const ScreenContainer: React.SFC<ScreenContainerProps> = ({
   scroll,
   avoidKeyboard,
   children,
+  centered,
   ...props
 }) => {
   const ContainerComponent = avoidKeyboard ? KeyboardAvoidingView : View;
+  const customStyles: StyleProp<ViewStyle> = [
+    centered && { alignItems: 'center' },
+  ];
 
   if (!scroll) {
     return (
       <ContainerComponent
         {...props}
         children={children}
-        style={[props.style, styles.screenContainer]}
+        style={[props.style, styles.screenContainer, ...customStyles]}
       />
     );
   }
@@ -54,6 +60,7 @@ const ScreenContainer: React.SFC<ScreenContainerProps> = ({
           styles.fullWidthContainer,
           // remove flex property
           { ...styles.screenContainer, flex: undefined },
+          ...customStyles
         ]}
       >
         {children}

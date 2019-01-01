@@ -674,9 +674,9 @@
   integrity sha512-EHe/YKctU3IYNBsDmSOPX/7jLHPRlx8WaiDKSY9JCTnJ8XJeM4c0ZJvx+9Gxmr2s2ihI92R+3U/gNL1sq5oRuQ==
 
 "@types/expo@^31.0.5":
-  version "31.0.5"
-  resolved "https://registry.yarnpkg.com/@types/expo/-/expo-31.0.5.tgz#54aa6ca7c97cf17fa83caedc8d0ef6ba2521003d"
-  integrity sha512-z7OHBKpAatLlCZv4rK9WX6zUhCb8FIGaoVomxZPAQW1QBxW9fMbUNS4ouBrwGv1ud95MyisP+hV11sCr162G5A==
+  version "31.0.6"
+  resolved "https://registry.yarnpkg.com/@types/expo/-/expo-31.0.6.tgz#be1aade447ce7db548de1bdb4536326f9e8f887c"
+  integrity sha512-7HHrGRUF+F8dyeRnf24UG7CuLr2sVs5/GeNRrgRY1EN35uhc/IWjUe6Ir6uZOI8I6BiVN0xTvpoK5vv+hHwyIQ==
   dependencies:
     "@types/fbemitter" "*"
     "@types/react" "*"
@@ -733,9 +733,9 @@
     "@types/react-native" "*"
 
 "@types/react-native@*", "@types/react-native@^0.57.23":
-  version "0.57.23"
-  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.57.23.tgz#6f654c2129d4108fc26eaa4b2658df77cc22e024"
-  integrity sha512-PO/OaBmcSy7R5BapGKOZp882X7G20KEVLSXFza4YU0V8IoXsf/B4jSfON37qUwEjhnidG6Xwp18suGgxt1DlrQ==
+  version "0.57.24"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.57.24.tgz#10c62d99eac4b0a6a52e6fe3ffe66d03a71bef92"
+  integrity sha512-zwmqAh0c1wBRhFJ6rDN4h7A/9VkzFQiX5bFF0wU7qVUCRspRftyOr9ElX3OzwpuRKw9mMeKEdIURS3hd0cfnxg==
   dependencies:
     "@types/prop-types" "*"
     "@types/react" "*"
@@ -767,9 +767,9 @@
   integrity sha1-Yhpman8CAY58u0q6uVaiVzbCfXE=
 
 "@types/yup@^0.26.3":
-  version "0.26.3"
-  resolved "https://registry.yarnpkg.com/@types/yup/-/yup-0.26.3.tgz#7991240645fc8171481838b01a19e355dfdb17fc"
-  integrity sha512-Df1N/EAMOvz9qlt5JbNX8ZvkMTcZcHWQU1nJ6jdz5aTx/oRnn1cmtOTtd+1AEVYDZshqJR3t7nRGPutADiVa/g==
+  version "0.26.4"
+  resolved "https://registry.yarnpkg.com/@types/yup/-/yup-0.26.4.tgz#b6527d1ea167ac8049b6d62b45cff8eadfe883c5"
+  integrity sha512-R6Mgx+puMTwst8jX3rJDN2Ncu9jF8P/88NOPa8DeCx3OU6Md+Fuo8AV4+WqNCujWNp/XjJtQd4o3fH0/9O19yw==
 
 abab@^2.0.0:
   version "2.0.0"
@@ -5631,12 +5631,7 @@ react-native-gesture-handler@1.0.9:
     invariant "^2.2.2"
     prop-types "^15.5.10"
 
-react-native-maps@*:
-  version "0.22.1"
-  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.22.1.tgz#ce856e71970e872e596e6fa4773279cae2c4dcdd"
-  integrity sha512-JjBpAXjzZY8AW4HTcAZxX+cGk6e6i+J5Vd//DViMUe0bRkKKv92ds1W9rqZ+o9PhUqdP++3DvKv0jrB05icqKA==
-
-react-native-maps@expo/react-native-maps#v0.22.1-exp.0:
+react-native-maps@*, react-native-maps@expo/react-native-maps#v0.22.1-exp.0:
   version "0.22.1"
   resolved "https://codeload.github.com/expo/react-native-maps/tar.gz/e6f98ff7272e5d0a7fe974a41f28593af2d77bb2"
 
