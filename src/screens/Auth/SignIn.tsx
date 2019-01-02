@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
   password: {
     textAlign: 'center',
     borderBottomWidth: 0,
+    marginBottom: 24
   },
   submitBtn: {
     marginTop: 'auto',

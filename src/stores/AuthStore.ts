@@ -48,7 +48,7 @@ class AuthStore {
       }
     }
 
-    return false
+    return this.isAuthenticated
   }
 }
 
