@@ -1,4 +1,4 @@
-import { observable, computed } from 'mobx';
+import { observable, computed, action } from 'mobx';
 import { AsyncStorage } from 'react-native';
 import { User } from '~/models/User';
 import { encrypt } from '~/utils/encryptor';
@@ -12,6 +12,7 @@ class AuthStore {
     return Boolean(this.currentUser);
   }
 
+  @action
   public loadCurrentUser = async () => {
     const savedUserJson = await AsyncStorage.getItem('currentUser');
 
@@ -36,13 +37,14 @@ class AuthStore {
     navigator.navigate('Home');
   };
 
+  @action
   public authenticate = (password: string) => {
     if (this.canAuthenticate) {
       const hash = encrypt(password)
-  
+      
       if (hash === this.currentUser!.password) {
+        this.isAuthenticated = true
         navigator.navigate('Home')
-        return true
       }
     }
 

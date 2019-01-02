@@ -8,16 +8,19 @@ import {
   Button,
   Image,
   Animated,
-  View,
   TextInput,
   Vibration,
+  View,
+  TouchableHighlight,
 } from 'react-native';
 import StyledText from '@ui/StyledText';
 import FormActions from '@ui/FormActions';
 import Logo from '~/assets/images/logo.jpg';
-import { inject } from 'mobx-react';
+import { inject, observer } from 'mobx-react';
 import AuthStore from '~/stores/AuthStore';
 import { createShakingAnimation } from '~/utils/animations';
+import Colors from '~/constants/Colors';
+import NumericKeyboard from '~/components/NumericKeyboard';
 
 interface SignInProps extends NavigationScreenProps {
   authStore: AuthStore;
@@ -25,15 +28,14 @@ interface SignInProps extends NavigationScreenProps {
 
 const styles = StyleSheet.create({
   logo: {
-    width: 120,
-    height: 120,
+    width: 70,
+    height: 70,
   },
   label: {
-    marginTop: 36,
+    marginTop: 8,
+    marginBottom: 8
   },
   password: {
-    width: '100%',
-    marginTop: 16,
     textAlign: 'center',
     borderBottomWidth: 0,
   },
@@ -42,12 +44,11 @@ const styles = StyleSheet.create({
   },
 });
 
-class SignIn extends React.PureComponent<SignInProps> {
+@observer
+class SignIn extends React.Component<SignInProps> {
   static navigationOptions = {
     title: 'Sign In',
   };
-
-  private textInput = React.createRef<TextInput>();
 
   state = {
     password: '',
@@ -73,12 +74,15 @@ class SignIn extends React.PureComponent<SignInProps> {
     }
   };
 
-  handlePasswordChange = (password: string) => {
-    if (!password && this.textInput.current) {
-      this.textInput.current.focus();
-    }
+  handleNumberInput = (number: number) => {
+    this.setState({
+      password: `${this.state.password}${number}`,
+    });
+  };
 
-    this.setState({ password });
+  handleDelete = () => {
+    const { password } = this.state;
+    this.setState({ password: password.substring(0, password.length - 1) });
   };
 
   authenticate = () => {
@@ -92,31 +96,40 @@ class SignIn extends React.PureComponent<SignInProps> {
         value: 40,
         duration: 80,
         prop: this.state.shakeAnimation,
-      }).start()
+      }).start();
 
-      Vibration.vibrate(400, false)
+      Vibration.vibrate(400, false);
     }
   };
 
   render() {
     return (
-      <ScreenContainer centered scroll avoidKeyboard>
+      <ScreenContainer centered scroll>
         <Image source={Logo} style={styles.logo} />
 
         <StyledText style={styles.label} variant="title" align="center">
           Your password
         </StyledText>
 
-        <Animated.View style={{ marginLeft: this.state.shakeAnimation as any }}>
+        <Animated.View
+          style={{
+            width: '100%',
+            marginLeft: this.state.shakeAnimation as any,
+          }}
+        >
           <StyledTextInput
-            autoFocus
+            editable={false}
             secureTextEntry
-            forwardRef={this.textInput}
             style={styles.password}
-            keyboardType="numeric"
-            onChangeText={this.handlePasswordChange}
+            value={this.state.password}
           />
         </Animated.View>
+
+        <NumericKeyboard
+          onDelete={this.handleDelete}
+          onNumberEnter={this.handleNumberInput}
+          onFingerPrintRequest={this.authenticateWithFingerPrint}
+        />
 
         <FormActions>
           <Button title="Continue" onPress={this.authenticate} />
