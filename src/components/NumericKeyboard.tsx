@@ -47,7 +47,7 @@ const KeyboardButton = (props: {
   <View style={styles.buttonContainer}>
     <TouchableHighlight
       style={styles.keyboardButton}
-      underlayColor={Colors.tintColor}
+      underlayColor={Colors.primaryColor}
       onPress={() => props.onNumberEnter(props.number)}
     >
       <StyledText disableMargin variant="title">
@@ -90,7 +90,7 @@ const NumericKeyboard: React.SFC<NumericKeyboardProps> = ({
         <TouchableHighlight
           onPress={onDelete}
           style={styles.actionButton}
-          underlayColor={Colors.tintColor}
+          underlayColor={Colors.primaryColor}
         >
           <Ionicons name="ios-backspace" color={Colors.textColor} size={36} />
         </TouchableHighlight>

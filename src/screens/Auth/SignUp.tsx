@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Image, StyleSheet, View, Button } from 'react-native';
 import screen from '~/components/screen';
 import ScreenContainer from '@ui/ScreenContainer';
-import Logo from '~/assets/images/logo.jpg';
+import Logo from '~/assets/images/logo.png';
 import StyledText from '@ui/StyledText';
 import { NavigationScreenProps } from 'react-navigation';
 

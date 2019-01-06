@@ -6,27 +6,21 @@ import {
   NavigationScreenOptions,
 } from 'react-navigation';
 
-import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
+import Icon from '../components/Icon';
+import WeightScreen from '../screens/HomeScreen';
+// @ts-ignore
 import LinksScreen from '../screens/LinksScreen';
+// @ts-ignore
 import SettingsScreen from '../screens/SettingsScreen';
+import Colors from '~/constants/Colors';
 
 const HomeStack = createStackNavigator({
-  Home: HomeScreen,
+  Home: WeightScreen,
 });
 
 HomeStack.navigationOptions = {
   tabBarLabel: 'Home',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
-  ),
+  tabBarIcon: ({ focused }) => <Icon name="fitness" focused={focused} />,
 } as NavigationScreenOptions;
 
 const LinksStack = createStackNavigator({
@@ -35,12 +29,7 @@ const LinksStack = createStackNavigator({
 
 LinksStack.navigationOptions = {
   tabBarLabel: 'Links',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
-    />
-  ),
+  tabBarIcon: ({ focused }) => <Icon name="link" focused={focused} />,
 } as NavigationScreenOptions;
 
 const SettingsStack = createStackNavigator({
@@ -49,16 +38,18 @@ const SettingsStack = createStackNavigator({
 
 SettingsStack.navigationOptions = {
   tabBarLabel: 'Settings',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
-    />
-  ),
+  tabBarIcon: ({ focused }) => <Icon name="options" focused={focused} />,
 } as NavigationScreenOptions;
 
-export default createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
-  SettingsStack,
-});
+export default createBottomTabNavigator(
+  {
+    LinksStack,
+    HomeStack,
+    SettingsStack,
+  },
+  {
+    tabBarOptions: {
+      activeTintColor: Colors.primaryColor,
+    },
+  }
+);

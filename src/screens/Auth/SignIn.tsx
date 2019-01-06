@@ -8,18 +8,14 @@ import {
   Button,
   Image,
   Animated,
-  TextInput,
   Vibration,
-  View,
-  TouchableHighlight,
 } from 'react-native';
+import AuthStore from '~/stores/AuthStore';
 import StyledText from '@ui/StyledText';
 import FormActions from '@ui/FormActions';
-import Logo from '~/assets/images/logo.jpg';
+import Logo from '~/assets/images/logo.png';
 import { inject, observer } from 'mobx-react';
-import AuthStore from '~/stores/AuthStore';
 import { createShakingAnimation } from '~/utils/animations';
-import Colors from '~/constants/Colors';
 import NumericKeyboard from '~/components/NumericKeyboard';
 
 interface SignInProps extends NavigationScreenProps {
@@ -105,7 +101,7 @@ class SignIn extends React.Component<SignInProps> {
 
   render() {
     return (
-      <ScreenContainer centered scroll>
+      <ScreenContainer centered>
         <Image source={Logo} style={styles.logo} />
 
         <StyledText style={styles.label} variant="title" align="center">

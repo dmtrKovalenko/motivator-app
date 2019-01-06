@@ -1,15 +1,6 @@
 import React from 'react';
-import {
-  Image,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  FlexAlignType,
-} from 'react-native';
-import { inject, observer } from 'mobx-react';
+import { StyleSheet, View } from 'react-native';
+import { observer } from 'mobx-react';
 import AuthStore from '~/stores/AuthStore';
 import StyledText from '@ui/StyledText';
 
@@ -31,7 +22,7 @@ type Props = {
   navigationStore: AuthStore;
 };
 
-const HomeScreen = (props: Props) => {
+const WeightScreen = (props: Props) => {
   return (
     <View style={styles.container}>
       <StyledText>Get started by opening </StyledText>
@@ -39,7 +30,7 @@ const HomeScreen = (props: Props) => {
   );
 };
 
-HomeScreen.navigationOptions = {
+WeightScreen.navigationOptions = {
   title: 'Sobaka',
   headerTitleStyle: {
     fontWeight: 'bold',
@@ -47,4 +38,4 @@ HomeScreen.navigationOptions = {
   },
 };
 
-export default observer(HomeScreen);
+export default observer(WeightScreen);
