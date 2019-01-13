@@ -1,22 +1,12 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
 import { observer } from 'mobx-react';
 import AuthStore from '~/stores/AuthStore';
 import StyledText from '@ui/StyledText';
+import { StyleSheet } from 'react-native';
+import ScreenContainer from '@ui/ScreenContainer';
+import screen from '~/components/screen';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: '#fff',
-  },
-  getStartedText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    lineHeight: 24,
-    textAlign: 'center',
-  },
-});
+const styles = StyleSheet.create({});
 
 type Props = {
   navigationStore: AuthStore;
@@ -24,18 +14,14 @@ type Props = {
 
 const WeightScreen = (props: Props) => {
   return (
-    <View style={styles.container}>
-      <StyledText>Get started by opening </StyledText>
-    </View>
+    <ScreenContainer>
+      <StyledText align="center"> Yeeeeey </StyledText>
+    </ScreenContainer>
   );
 };
 
 WeightScreen.navigationOptions = {
   title: 'Sobaka',
-  headerTitleStyle: {
-    fontWeight: 'bold',
-    fontFamily: 'lato',
-  },
 };
 
-export default observer(WeightScreen);
+export default screen("Your weight")(observer(WeightScreen));

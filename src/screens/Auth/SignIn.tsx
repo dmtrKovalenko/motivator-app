@@ -3,20 +3,17 @@ import ScreenContainer from '@ui/ScreenContainer';
 import { LocalAuthentication } from 'expo';
 import { NavigationScreenProps } from 'react-navigation';
 import StyledTextInput from '@ui/StyledTextInput';
-import {
-  StyleSheet,
-  Button,
-  Image,
-  Animated,
-  Vibration,
-} from 'react-native';
+import { StyleSheet, Button, Image, Animated, Vibration } from 'react-native';
 import AuthStore from '~/stores/AuthStore';
 import StyledText from '@ui/StyledText';
 import FormActions from '@ui/FormActions';
 import Logo from '~/assets/images/logo.png';
-import { inject, observer } from 'mobx-react';
+import { observer } from 'mobx-react';
 import { createShakingAnimation } from '~/utils/animations';
 import NumericKeyboard from '~/components/NumericKeyboard';
+import Colors from '~/constants/Colors';
+import screen from '~/components/screen';
+import { injectStore } from '~/stores/injectStore';
 
 interface SignInProps extends NavigationScreenProps {
   authStore: AuthStore;
@@ -29,12 +26,12 @@ const styles = StyleSheet.create({
   },
   label: {
     marginTop: 8,
-    marginBottom: 8
+    marginBottom: 8,
   },
   password: {
     textAlign: 'center',
     borderBottomWidth: 0,
-    marginBottom: 24
+    marginBottom: 24,
   },
   submitBtn: {
     marginTop: 'auto',
@@ -43,10 +40,6 @@ const styles = StyleSheet.create({
 
 @observer
 class SignIn extends React.Component<SignInProps> {
-  static navigationOptions = {
-    title: 'Sign In',
-  };
-
   state = {
     password: '',
     shakeAnimation: new Animated.Value(1),
@@ -129,11 +122,15 @@ class SignIn extends React.Component<SignInProps> {
         />
 
         <FormActions>
-          <Button title="Continue" onPress={this.authenticate} />
+          <Button
+            color={Colors.primaryColor}
+            title="Continue"
+            onPress={this.authenticate}
+          />
         </FormActions>
       </ScreenContainer>
     );
   }
 }
 
-export default inject('authStore')(SignIn);
+export default screen('Sign In')(injectStore('authStore')(SignIn));

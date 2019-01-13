@@ -1,5 +1,7 @@
 import AuthStore from './AuthStore'
 
-export default { 
+export const storesMap = { 
   authStore: new AuthStore()
 }
+
+export type StoresMap = typeof storesMap;

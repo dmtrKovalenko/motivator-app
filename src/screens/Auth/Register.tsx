@@ -6,11 +6,13 @@ import { Button, StyleSheet, View } from 'react-native';
 import StyledText from '@ui/StyledText';
 import ScreenContainer from '@ui/ScreenContainer';
 import { RegisterSchema } from '~/models/validate/RegisterSchema';
-import { inject, observer } from 'mobx-react';
+import { observer } from 'mobx-react';
 import AuthStore from '~/stores/AuthStore';
 import { User } from '~/models/User';
 import { NavigationScreenProps } from 'react-navigation';
 import FormActions from '@ui/FormActions';
+import Colors from '~/constants/Colors';
+import { injectStore } from '~/stores/injectStore';
 
 interface RegisterProps extends NavigationScreenProps {
   authStore: AuthStore;
@@ -93,6 +95,7 @@ const Register: React.SFC<RegisterProps> = ({ authStore, navigation }) => {
               <Button
                 title="Start becoming better"
                 disabled={!props.isValid}
+                color={Colors.primaryColor}
                 onPress={() => props.handleSubmit()}
               />
             </FormActions>
@@ -104,5 +107,5 @@ const Register: React.SFC<RegisterProps> = ({ authStore, navigation }) => {
 };
 
 export default screen('Register', { headerLeft: null })(
-  inject('authStore')(observer(Register))
+  injectStore('authStore')(observer(Register))
 );

@@ -3,7 +3,8 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Font } from 'expo';
 import { Provider } from 'mobx-react';
 import createAppNavigator from './src/navigation/AppNavigator';
-import stores from './src/stores';
+import { storesMap } from './src/stores';
+import { StoreContext } from '~/stores/injectStore'
 import navigator from '~/utils/navigator';
 
 type Props = {
@@ -24,7 +25,7 @@ export default class App extends React.PureComponent<Props> {
 
   private loadResourcesAsync = async () => {
     return Promise.all([
-      stores.authStore.loadCurrentUser(),
+      storesMap.authStore.loadCurrentUser(),
       Font.loadAsync({
         lato: require('./src/assets/fonts/Lato-Regular.ttf'),
       }),
@@ -54,7 +55,7 @@ export default class App extends React.PureComponent<Props> {
 
     const AppNavigator = createAppNavigator()
     return (
-      <Provider {...stores}>
+      <StoreContext.Provider value={storesMap}>
         <View style={styles.container}>
           {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
 
@@ -68,7 +69,7 @@ export default class App extends React.PureComponent<Props> {
             }}
           />
         </View>
-      </Provider>
+      </StoreContext.Provider>
     );
   }
 }

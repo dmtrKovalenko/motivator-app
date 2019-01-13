@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View, TouchableHighlight } from 'react-native';
+import { StyleSheet, View, TouchableHighlight, Platform } from 'react-native';
 import StyledText from '@ui/StyledText';
 import Colors from '~/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
@@ -10,6 +10,7 @@ interface NumericKeyboardProps {
   onNumberEnter: (number: number) => void;
 }
 
+const buttonSize = Platform.OS === 'ios' ? 70 : 60;
 const styles = StyleSheet.create({
   keyboard: {
     flexWrap: 'wrap',
@@ -25,15 +26,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'black',
     borderRadius: 50,
-    height: 70,
-    width: 70,
+    height: buttonSize,
+    width: buttonSize,
     marginBottom: 16,
     alignItems: 'center',
     justifyContent: 'center',
   },
   actionButton: {
-    height: 70,
-    width: 70,
+    height: buttonSize,
+    width: buttonSize,
     borderRadius: 50,
     alignItems: 'center',
     justifyContent: 'center',

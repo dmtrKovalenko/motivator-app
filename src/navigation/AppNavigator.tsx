@@ -3,7 +3,7 @@ import MainTabNavigator from './MainTabNavigator';
 import SignUp from '../screens/Auth/SignUp';
 import SignIn from '~/screens/Auth/SignIn'
 import Register from '../screens/Auth/Register';
-import stores from '~/stores';
+import { storesMap } from '~/stores';
 
 export default () => createSwitchNavigator(
   {
@@ -15,9 +15,9 @@ export default () => createSwitchNavigator(
     }),
   },
   {
-    initialRouteName: stores.authStore.isAuthenticated
+    initialRouteName: storesMap.authStore.isAuthenticated
       ? 'Main'
-      : stores.authStore.canAuthenticate
+      : storesMap.authStore.canAuthenticate
         ? 'SignIn'
         : 'SignUp',
   }

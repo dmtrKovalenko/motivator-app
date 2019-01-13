@@ -1,4 +1,5 @@
 import { NavigationScreenOptions } from 'react-navigation'
+import { Platform } from 'react-native';
 
 type NavigationScreenComponent<T = any> = {
   navigationOptions?: NavigationScreenOptions
@@ -9,7 +10,9 @@ const screen = (title: string, options?: NavigationScreenOptions) => <T>(Compone
     title,  
     headerTitleStyle: {
       fontFamily: 'lato',
-      fontSize: 20
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      fontSize: Platform.OS === 'android' ? 18 : 20
     }, 
     ...options
   } 
