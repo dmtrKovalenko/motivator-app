@@ -6,7 +6,6 @@ import {
   View,
   StyleProp,
   ViewStyle,
-  TextProps,
 } from 'react-native';
 import StyledText, { StyledTextProps } from './StyledText';
 import Colors from '~/constants/Colors';

@@ -18,9 +18,10 @@
     "@types/crypto-js": "^3.1.43",
     "@types/expo": "^31.0.5",
     "@types/expo__vector-icons": "^6.2.3",
-    "@types/react": "^16.7.18",
-    "@types/react-native": "^0.57.23",
+    "@types/react": "^16.7.21",
+    "@types/react-native": "^0.57.32",
     "@types/react-navigation": "^3.0.1",
+    "@types/recompose": "^0.30.2",
     "@types/yup": "^0.26.3",
     "babel-plugin-module-resolver": "^3.1.1",
     "babel-plugin-root-import": "^6.1.0",
@@ -32,8 +33,9 @@
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-navigation": "^2.18.2",
+    "recompose": "^0.30.0",
     "tslint": "^5.12.0",
-    "typescript": "^3.2.2",
+    "typescript": "^3.3.0-dev.20190119",
     "yup": "^0.26.6"
   },
   "devDependencies": {

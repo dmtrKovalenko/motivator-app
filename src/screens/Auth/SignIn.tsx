@@ -8,37 +8,40 @@ import AuthStore from '~/stores/AuthStore';
 import StyledText from '@ui/StyledText';
 import FormActions from '@ui/FormActions';
 import Logo from '~/assets/images/logo.png';
+import compose from 'recompose/compose';
 import { observer } from 'mobx-react';
 import { createShakingAnimation } from '~/utils/animations';
 import NumericKeyboard from '~/components/NumericKeyboard';
 import Colors from '~/constants/Colors';
 import screen from '~/components/screen';
 import { injectStore } from '~/stores/injectStore';
+import { WithStyles, withStyles, styled } from '@ui/styles/createStyles';
 
-interface SignInProps extends NavigationScreenProps {
+const styles = styled(theme =>
+  StyleSheet.create({
+    logo: {
+      width: 70,
+      height: 70,
+    },
+    label: {
+      marginTop: 8,
+      marginBottom: 8,
+    },
+    password: {
+      textAlign: 'center',
+      borderBottomWidth: 0,
+      marginBottom: 24,
+    },
+    submitBtn: {
+      marginTop: 'auto',
+    },
+  })
+);
+
+interface SignInProps extends NavigationScreenProps, WithStyles<typeof styles> {
   authStore: AuthStore;
 }
 
-const styles = StyleSheet.create({
-  logo: {
-    width: 70,
-    height: 70,
-  },
-  label: {
-    marginTop: 8,
-    marginBottom: 8,
-  },
-  password: {
-    textAlign: 'center',
-    borderBottomWidth: 0,
-    marginBottom: 24,
-  },
-  submitBtn: {
-    marginTop: 'auto',
-  },
-});
-
-@observer
 class SignIn extends React.Component<SignInProps> {
   state = {
     password: '',
@@ -66,7 +69,7 @@ class SignIn extends React.Component<SignInProps> {
 
   handleNumberInput = (number: number) => {
     this.setState({
-      password: `${this.state.password}${number}`,
+      password: this.state.password + number.toString(),
     });
   };
 
@@ -93,6 +96,8 @@ class SignIn extends React.Component<SignInProps> {
   };
 
   render() {
+    const { styles } = this.props;
+
     return (
       <ScreenContainer centered>
         <Image source={Logo} style={styles.logo} />
@@ -133,4 +138,9 @@ class SignIn extends React.Component<SignInProps> {
   }
 }
 
-export default screen('Sign In')(injectStore('authStore')(SignIn));
+export default compose<any, any>(
+  observer,
+  screen('SignIn'),
+  injectStore('authStore'),
+  withStyles(styles)
+)(SignIn);

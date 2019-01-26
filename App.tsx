@@ -1,11 +1,12 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Font } from 'expo';
-import { Provider } from 'mobx-react';
 import createAppNavigator from './src/navigation/AppNavigator';
 import { storesMap } from './src/stores';
-import { StoreContext } from '~/stores/injectStore'
+import { StoreContext } from '~/stores/injectStore';
 import navigator from '~/utils/navigator';
+import { ThemeContext } from '@ui/styles/ThemeContext';
+import { defaultTheme } from '@ui/styles/Theme';
 
 type Props = {
   skipLoadingScreen: boolean;
@@ -53,23 +54,25 @@ export default class App extends React.PureComponent<Props> {
       );
     }
 
-    const AppNavigator = createAppNavigator()
+    const AppNavigator = createAppNavigator();
     return (
-      <StoreContext.Provider value={storesMap}>
-        <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+      <ThemeContext.Provider value={defaultTheme}>
+        <StoreContext.Provider value={storesMap}>
+          <View style={styles.container}>
+            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
 
-          <AppNavigator
-            ref={navigatorRef => {
-              if (!navigatorRef) {
-                throw new Error("navigatorRef cannot be set")
-              }
-              
-              navigator.setTopLevelNavigator(navigatorRef.dispatch)
-            }}
-          />
-        </View>
-      </StoreContext.Provider>
+            <AppNavigator
+              ref={navigatorRef => {
+                if (!navigatorRef) {
+                  throw new Error('navigatorRef cannot be set');
+                }
+
+                navigator.setTopLevelNavigator(navigatorRef.dispatch);
+              }}
+            />
+          </View>
+        </StoreContext.Provider>
+      </ThemeContext.Provider>
     );
   }
 }
